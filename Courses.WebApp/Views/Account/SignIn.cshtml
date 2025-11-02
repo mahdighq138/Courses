@@ -1,0 +1,67 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+
+}
+
+<main class="main">
+    <div class="page-title" data-aos="fade">
+        <nav class="breadcrumbs">
+            <div class="container">
+                <ol>
+                    <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+                    <li class="current">SignIn</li>
+                </ol>
+            </div>
+        </nav>
+    </div>
+    <!-- Sign In Section -->
+    <section id="signin" class="signin section light-background">
+        <div class="container" data-aos="fade-up">
+            <div class="section-title text-center">
+                <p>Log in to your account</p>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <form asp-controller="Account" asp-action="Signin" method="post" class="php-email-form shadow p-4 rounded bg-white">
+                        <div class="row gy-3">
+
+                            <div class="col-12">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" name="email" id="email" class="form-control" required>
+                            </div>
+
+                            <div class="col-12">
+                                <label for="password" class="form-label">Password</label>
+                                <div class="input-group">
+                                    <input type="password" name="password" id="password" class="form-control" required>
+                                    <button type="button" class="btn btn-outline-secondary" id="togglePassword">
+                                        Show Password
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="col-12 text-center mt-4">
+                                <button type="submit" class="btn btn-primary w-100 py-2">Sign In</button>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- /Sign In Section -->
+    <script>
+        document.getElementById('togglePassword').addEventListener('click', function () {
+            const passwordInput = document.getElementById('password');
+            const isPassword = passwordInput.type === 'password';
+            passwordInput.type = isPassword ? 'text' : 'password';
+            this.textContent = isPassword ? 'Hide Password' : 'Show Password';
+        });
+    </script>
+
+</main>
+

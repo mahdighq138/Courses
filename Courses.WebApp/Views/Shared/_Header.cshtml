@@ -1,0 +1,47 @@
+﻿
+<header id="header" class="header d-flex align-items-center sticky-top">
+    <div class="container-fluid container-xl position-relative d-flex align-items-center">
+
+        <a asp-controller="Home" asp-action="index" class="logo d-flex align-items-center me-auto">
+            <!-- Uncomment the line below if you also wish to use an image logo -->
+            <!-- <img src="/img/logo.webp" alt=""> -->
+            <h1 class="sitename">Mentor</h1>
+        </a>
+
+        <nav id="navmenu" class="navmenu">
+            <ul>
+                <li><a asp-controller="Home" asp-action="index" class="active">Home<br></a></li>
+                <li><a asp-controller="Home" asp-action="about">About</a></li>
+                <li><a asp-controller="Home" asp-action="courses">Courses</a></li>
+                <li><a asp-controller="Home" asp-action="trainers">Trainers</a></li>
+                <li><a asp-controller="Home" asp-action="events">Events</a></li>
+                <li><a asp-controller="Home" asp-action="pricing">Pricing</a></li>
+                <li class="dropdown">
+                    <a href="#"><span>Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                    <ul>
+                        <li><a href="#">Dropdown 1</a></li>
+                        <li class="dropdown">
+                            <a href="#"><span>Deep Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                            <ul>
+                                <li><a href="#">Deep Dropdown 1</a></li>
+                                <li><a href="#">Deep Dropdown 2</a></li>
+                                <li><a href="#">Deep Dropdown 3</a></li>
+                                <li><a href="#">Deep Dropdown 4</a></li>
+                                <li><a href="#">Deep Dropdown 5</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">Dropdown 2</a></li>
+                        <li><a href="#">Dropdown 3</a></li>
+                        <li><a href="#">Dropdown 4</a></li>
+                    </ul>
+                </li>
+                <li><a asp-controller="Home" asp-action="contact">Contact</a></li>
+            </ul>
+            <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+        </nav>
+
+        <a class="btn-getstarted" asp-controller="Account" asp-action="SignIn">Sign In</a>
+        <a class="btn-getstarted" asp-controller="Account" asp-action="SignUp">Sign Up</a>
+
+    </div>
+</header>

@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="BaseEntities\" />
     <Folder Include="Interfaces\" />
   </ItemGroup>
 
