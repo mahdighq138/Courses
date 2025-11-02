@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Courses.Domain.BaseEntities
+namespace Courses.Domain.BaseEntities.User
 {
     public class Role
     {
