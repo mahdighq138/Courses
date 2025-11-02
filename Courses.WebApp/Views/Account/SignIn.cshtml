@@ -1,6 +1,4 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model Courses.Application.DTOs.AccountViewModels.SignInViewModel
 @{
 
 }
@@ -29,14 +27,14 @@
                         <div class="row gy-3">
 
                             <div class="col-12">
-                                <label for="email" class="form-label">Email</label>
-                                <input type="email" name="email" id="email" class="form-control" required>
+                                <label asp-for="UserNameOrEmail" class="form-label">User Name or Email</label>
+                                <input asp-for="UserNameOrEmail" type="email" class="form-control" required>
                             </div>
 
                             <div class="col-12">
-                                <label for="password" class="form-label">Password</label>
+                                <label asp-for="Password" class="form-label">Password</label>
                                 <div class="input-group">
-                                    <input type="password" name="password" id="password" class="form-control" required>
+                                    <input asp-for="Password" type="password" class="form-control" required />
                                     <button type="button" class="btn btn-outline-secondary" id="togglePassword">
                                         Show Password
                                     </button>

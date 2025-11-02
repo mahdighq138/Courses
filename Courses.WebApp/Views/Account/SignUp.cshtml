@@ -1,6 +1,4 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model Courses.Application.DTOs.AccountViewModels.SignUpViewModel
 @{
 
 }
@@ -29,33 +27,33 @@
                         <div class="row gy-3">
 
                             <div class="col-md-6">
-                                <label for="first-name" class="form-label">First Name</label>
-                                <input type="text" name="first-name" id="first-name" class="form-control">
+                                <label asp-for="FirstName" class="form-label">First Name</label>
+                                <input asp-for="FirstName" type="text" class="form-control">
                             </div>
 
                             <div class="col-md-6">
-                                <label for="last-name" class="form-label">Last Name</label>
-                                <input type="text" name="last-name" id="last-name" class="form-control">
+                                <label asp-for="LastName" class="form-label">Last Name</label>
+                                <input asp-for="LastName" type="text" class="form-control">
                             </div>
 
                             <div class="col-md-6">
-                                <label for="user-name" class="form-label">User Name</label>
-                                <input type="text" name="user-name" id="user-name" class="form-control" required>
+                                <label asp-for="UserName" class="form-label">User Name</label>
+                                <input asp-for="UserName" type="text" class="form-control" required>
                             </div>
 
                             <div class="col-12">
-                                <label for="email" class="form-label">Email</label>
-                                <input type="email" name="email" id="email" class="form-control" required>
+                                <label asp-for="Email" class="form-label">Email</label>
+                                <input asp-for="Email" type="email" class="form-control" required>
                             </div>
 
                             <div class="col-12">
-                                <label for="password" class="form-label">Password</label>
-                                <input type="password" name="password" id="password" class="form-control" required>
+                                <label asp-for="Password" class="form-label">Password</label>
+                                <input asp-for="Password" type="password" class="form-control" required>
                             </div>
 
                             <div class="col-12">
-                                <label for="confirm-password" class="form-label">Confirm Password</label>
-                                <input type="password" name="confirm-password" id="confirm-password" class="form-control" required>
+                                <label asp-for="ConfirmPassword" class="form-label">Confirm Password</label>
+                                <input asp-for="ConfirmPassword" type="password" class="form-control" required>
                             </div>
 
                             <div class="col-12 mt-2">
@@ -66,8 +64,8 @@
 
                             <div class="col-12">
                                 <div class="form-check mt-3">
-                                    <input class="form-check-input" type="checkbox" id="terms" required>
-                                    <label class="form-check-label" for="terms">
+                                    <input asp-for="AgreeToTerms" class="form-check-input" type="checkbox" required>
+                                    <label class="form-check-label" asp-for="AgreeToTerms">
                                         I agree to the <a asp-controller="Account" asp-action="Terms">Terms & Conditions</a>
                                     </label>
                                 </div>
