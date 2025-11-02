@@ -9,8 +9,7 @@ namespace Courses.Infrastructure.EntityConfigs.UserConfigs
 {
     public static class RoleConfiguration
     {
-        
-        public static void ConfigureUser (this EntityTypeBuilder<Domain.BaseEntities.User.User> entity)
+        public static void ConfigureUser (this EntityTypeBuilder<Domain.Entities.User.User> entity)
         {
             entity.HasKey(u => u.UserId);
             entity.HasIndex(u => u.UserName).IsUnique();

@@ -1,4 +1,4 @@
-﻿using Courses.Domain.BaseEntities.User;
+﻿using Courses.Domain.Entities.User;
 using Courses.Infrastructure.EntityConfigs.RoleConfigs;
 using Courses.Infrastructure.EntityConfigs.UserConfigs;
 using Microsoft.EntityFrameworkCore;

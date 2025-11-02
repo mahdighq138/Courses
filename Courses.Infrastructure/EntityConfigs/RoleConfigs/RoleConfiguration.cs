@@ -9,8 +9,7 @@ namespace Courses.Infrastructure.EntityConfigs.RoleConfigs
 {
     public static class RoleConfiguration
     {
-        
-        public static void ConfigureRole (this EntityTypeBuilder<Domain.BaseEntities.User.Role> entity)
+        public static void ConfigureRole (this EntityTypeBuilder<Domain.Entities.User.Role> entity)
         {
             entity.HasKey(r => r.RoleId);
             
