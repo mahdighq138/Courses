@@ -29,5 +29,8 @@ namespace Courses.Application.DTOs.AccountViewModels
         public required string Password { get; set; }
         [Compare("Password", ErrorMessage = "Passwords do not match.")]
         public required string ConfirmPassword { get; set; }
+
+
+        public bool AgreeToTerms { get; set; }
     }
 }
