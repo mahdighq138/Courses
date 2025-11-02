@@ -17,7 +17,7 @@ namespace Courses.Application.DTOs.AccountViewModels
         public string? LastName { get; set; }
 
 
-        [MaxLength(50, ErrorMessage = "User Name Too Long")]
+        [MaxLength(100, ErrorMessage = "User Name Too Long")]
         public required string UserName { get; set; }
 
 
