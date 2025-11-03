@@ -23,37 +23,43 @@
             </div>
             <div class="row justify-content-center">
                 <div class="col-lg-6">
-                    <form asp-controller="Account" asp-action="Signup" method="post" class="php-email-form shadow p-4 rounded bg-white">
+                    <form asp-controller="Account" asp-action="SignUp" method="post" class=" shadow p-4 rounded bg-white">
                         <div class="row gy-3">
 
                             <div class="col-md-6">
                                 <label asp-for="FirstName" class="form-label">First Name</label>
                                 <input asp-for="FirstName" type="text" class="form-control">
+                                <span asp-validation-for="FirstName" class="text-danger"></span>
                             </div>
 
                             <div class="col-md-6">
                                 <label asp-for="LastName" class="form-label">Last Name</label>
                                 <input asp-for="LastName" type="text" class="form-control">
+                                <span asp-validation-for="LastName" class="text-danger"></span>
                             </div>
 
                             <div class="col-md-6">
                                 <label asp-for="UserName" class="form-label">User Name</label>
                                 <input asp-for="UserName" type="text" class="form-control" required>
+                                <span asp-validation-for="UserName" class="text-danger"></span>
                             </div>
 
                             <div class="col-12">
                                 <label asp-for="Email" class="form-label">Email</label>
                                 <input asp-for="Email" type="email" class="form-control" required>
+                                <span asp-validation-for="Email" class="text-danger"></span>
                             </div>
 
                             <div class="col-12">
-                                <label asp-for="Password" class="form-label">Password</label>
-                                <input asp-for="Password" type="password" class="form-control" required>
+                                <label asp-for="Password" class="form-label"></label>
+                                <input asp-for="Password" type="password" class="form-control" />
+                                <span asp-validation-for="Password" class="text-danger"></span>
                             </div>
 
                             <div class="col-12">
-                                <label asp-for="ConfirmPassword" class="form-label">Confirm Password</label>
-                                <input asp-for="ConfirmPassword" type="password" class="form-control" required>
+                                <label asp-for="ConfirmPassword" class="form-label"></label>
+                                <input asp-for="ConfirmPassword" type="password" class="form-control" />
+                                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
                             </div>
 
                             <div class="col-12 mt-2">
@@ -75,6 +81,8 @@
                                 <button type="submit" class="btn btn-primary w-100 py-2">Sign Up</button>
                             </div>
 
+                            <div asp-validation-summary="All"></div>
+
                         </div>
                     </form>
                 </div>
@@ -85,8 +93,8 @@
     <script>
         document.getElementById('togglePasswords').addEventListener('click', function () {
             const passwordFields = [
-                document.getElementById('password'),
-                document.getElementById('confirm-password')
+                document.getElementById('Password'),
+                document.getElementById('ConfirmPassword')
             ];
 
             const areHidden = passwordFields[0].type === 'password';
@@ -100,4 +108,11 @@
     </script>
 
 </main>
+
+
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+}
 

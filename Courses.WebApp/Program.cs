@@ -1,7 +1,18 @@
+using Courses.Infrastructure.Context;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+#region Add DbContext
+builder.Services.AddDbContext<CoursesDbContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("SqlServer"));
+});
+#endregion
+
 
 var app = builder.Build();
 
