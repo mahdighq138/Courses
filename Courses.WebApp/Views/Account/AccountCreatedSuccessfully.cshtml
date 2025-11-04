@@ -1,0 +1,33 @@
+﻿@model Courses.Application.DTOs.AccountViewModels.SignUpViewModel
+
+<main class="main">
+    <div class="page-title" data-aos="fade">
+        <nav class="breadcrumbs">
+            <div class="container">
+                <ol>
+                    <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+                    <li class="current">Account Created</li>
+                </ol>
+            </div>
+        </nav>
+    </div>
+
+    <div class="container">
+        <p>
+            Greetings
+            @{
+                if (string.IsNullOrEmpty(Model.FirstName) && string.IsNullOrEmpty(Model.LastName))
+                {
+                    @Model.UserName
+                }
+                else
+                {
+                    @(Model.FirstName + " " + Model.LastName)
+                }
+            }
+        </p>
+        <p>
+            We sent you a link to your email. To activate your email, click on that link
+        </p>
+    </div>
+</main>
