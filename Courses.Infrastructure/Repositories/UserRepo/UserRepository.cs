@@ -31,7 +31,16 @@ namespace Courses.Infrastructure.Repositories.UserRepo
             await _context.Users.AddAsync(user);
             await _context.SaveChangesAsync();
             return user.UserId;
-        } 
+        }
 
+        public async Task<User> FindUserByEmailAync(string email)
+        {
+            return (await _context.Users.FirstOrDefaultAsync(u => u.Email == email))!;
+        }
+
+        public async Task<User> FindUserByUserNameAync(string userName)
+        {
+            return (await _context.Users.FirstOrDefaultAsync(u => u.UserName == userName))!;
+        }
     }
 }
