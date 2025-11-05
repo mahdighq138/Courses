@@ -55,7 +55,7 @@ namespace Courses.Infrastructure.Repositories.UserRepo
             if (foundUser != null)
             {
                 foundUser.IsActive = true;
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
                 return true;
             }
             return false;
