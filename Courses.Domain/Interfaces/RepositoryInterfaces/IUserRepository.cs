@@ -14,5 +14,7 @@ namespace Courses.Domain.Interfaces.RepositoryInterfaces
         public Task<int> RegisterUserAsync(User user);
         public Task<User> FindUserByEmailAync(string email);
         public Task<User> FindUserByUserNameAync(string userName);
+        public Task<User> WhoseActivationCodeIsThis(string activationCode);
+
     }
 }

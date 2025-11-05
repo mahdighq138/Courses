@@ -42,5 +42,11 @@ namespace Courses.Infrastructure.Repositories.UserRepo
         {
             return (await _context.Users.FirstOrDefaultAsync(u => u.UserName == userName))!;
         }
+
+        public async Task<User> WhoseActivationCodeIsThis(string activationCode)
+        {
+            var user = await _context.Users.SingleOrDefaultAsync(u => u.ActivationCode == activationCode);
+            return user!;
+        }
     }
 }
