@@ -61,6 +61,18 @@ namespace Courses.Infrastructure.Repositories.UserRepo
             return false;
         }
 
+        public async Task<bool> ChangeActivationCodeAsync(User user, string newActivationCode)
+        {
+            var foundUser = await _context.Users.FindAsync(user);
+            if (foundUser != null)
+            {
+                foundUser.ActivationCode = newActivationCode;
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            return false;
+        }
+
 
     }
 }
