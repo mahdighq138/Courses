@@ -51,7 +51,7 @@ namespace Courses.Infrastructure.Repositories.UserRepo
 
         public async Task<bool> ActivateUserAsync(User user)
         {
-            var foundUser = await _context.Users.FindAsync(user);
+            var foundUser = await _context.Users.FindAsync(user.UserId);
             if (foundUser != null)
             {
                 foundUser.IsActive = true;
@@ -62,7 +62,7 @@ namespace Courses.Infrastructure.Repositories.UserRepo
 
         public async Task<bool> ChangeActivationCodeAsync(User user, string newActivationCode)
         {
-            var foundUser = await _context.Users.FindAsync(user);
+            var foundUser = await _context.Users.FindAsync(user.UserId);
             if (foundUser != null)
             {
                 foundUser.ActivationCode = newActivationCode;
@@ -73,7 +73,7 @@ namespace Courses.Infrastructure.Repositories.UserRepo
 
         public async Task<bool> DeActivateUserAsync(User user)
         {
-            var foundUser = await _context.Users.FindAsync(user);
+            var foundUser = await _context.Users.FindAsync(user.UserId);
             if (foundUser != null)
             {
                 foundUser.IsActive = false;
