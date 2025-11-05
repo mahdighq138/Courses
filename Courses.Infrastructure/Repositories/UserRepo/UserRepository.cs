@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Courses.Infrastructure.Repositories.UserRepo
 {
-    public class UserRepository(CoursesDbContext context): IUserRepository
+    public class UserRepository(CoursesDbContext context) : IUserRepository
     {
         private readonly CoursesDbContext _context = context;
 
@@ -33,7 +33,7 @@ namespace Courses.Infrastructure.Repositories.UserRepo
             return user.UserId;
         }
 
-        public async Task<User> FindUserByEmailAync(string email)
+        public async Task<User> FindUserByEmailAsync(string email)
         {
             return (await _context.Users.FirstOrDefaultAsync(u => u.Email == email))!;
         }
@@ -43,10 +43,24 @@ namespace Courses.Infrastructure.Repositories.UserRepo
             return (await _context.Users.FirstOrDefaultAsync(u => u.UserName == userName))!;
         }
 
-        public async Task<User> WhoseActivationCodeIsThis(string activationCode)
+        public async Task<User> WhoseActivationCodeIsThisAsync(string activationCode)
         {
             var user = await _context.Users.SingleOrDefaultAsync(u => u.ActivationCode == activationCode);
             return user!;
         }
+
+        public async Task<bool> ActivateUserAsync(User user)
+        {
+            var foundUser = await _context.Users.FindAsync(user);
+            if (foundUser != null)
+            {
+                foundUser.IsActive = true;
+                _context.SaveChanges();
+                return true;
+            }
+            return false;
+        }
+
+
     }
 }
