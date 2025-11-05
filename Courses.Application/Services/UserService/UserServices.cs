@@ -20,12 +20,12 @@ namespace Courses.Application.Services.UserService
         private readonly IPasswordHasher _hasher = hasher;
         private readonly IUserRepository _userRepository = userRepository;
 
- 
+
         public async Task<int> RegisterUserAsync(SignUpViewModel signUpViewModel)
         {
             signUpViewModel.Email = FixText.FixEmail(signUpViewModel.Email);
 
-            
+
 
             var userEntity = _mapper.Map<User>(signUpViewModel);
             userEntity.RegistrationDate = DateTime.Now;
@@ -45,6 +45,27 @@ namespace Courses.Application.Services.UserService
         public Task<bool> UserNameExistsAsync(string username)
         {
             return _userRepository.UserNameExistsAsync(username);
+        }
+
+        public async Task<User> SignInUserAync(SignInViewModel signInViewModel, bool isEmail = false, bool isUserName = false)
+        {
+            User user;
+            if (isEmail)
+            {
+                string email = FixText.FixEmail(signInViewModel.UserNameOrEmail);
+                user = await _userRepository.FindUserByEmailAync(email);
+            }
+            else
+            {
+                user = await _userRepository.FindUserByUserNameAync(signInViewModel.UserNameOrEmail);
+            }
+            bool correctPass = _hasher.VerifyPassword(user.Password, signInViewModel.Password);
+            if (correctPass)
+            {
+                return user;
+            }
+            return null;
+
         }
     }
 }
