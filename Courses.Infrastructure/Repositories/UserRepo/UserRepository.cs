@@ -55,7 +55,6 @@ namespace Courses.Infrastructure.Repositories.UserRepo
             if (foundUser != null)
             {
                 foundUser.IsActive = true;
-                await _context.SaveChangesAsync();
                 return true;
             }
             return false;
@@ -67,7 +66,6 @@ namespace Courses.Infrastructure.Repositories.UserRepo
             if (foundUser != null)
             {
                 foundUser.ActivationCode = newActivationCode;
-                await _context.SaveChangesAsync();
                 return true;
             }
             return false;
@@ -79,10 +77,22 @@ namespace Courses.Infrastructure.Repositories.UserRepo
             if (foundUser != null)
             {
                 foundUser.IsActive = false;
-                await _context.SaveChangesAsync();
                 return true;
             }
             return false;
+        }
+
+        public async Task<bool> CommitChangesAsync()
+        {
+            try
+            {
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
 

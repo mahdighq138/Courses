@@ -18,6 +18,6 @@ namespace Courses.Domain.Interfaces.RepositoryInterfaces
         public Task<bool> ActivateUserAsync(User user);
         public Task<bool> DeActivateUserAsync(User user);
         public Task<bool> ChangeActivationCodeAsync(User user, string newActivationCode);
-
+        public Task<bool> CommitChangesAsync();
     }
 }
