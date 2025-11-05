@@ -41,7 +41,6 @@ namespace Courses.WebApp.Controllers
 
 
         [HttpGet]
-
         public async Task<IActionResult> SignIn()
         {
             return View();
@@ -50,7 +49,41 @@ namespace Courses.WebApp.Controllers
         [HttpPost]
         public async Task<IActionResult> SignIn(Application.DTOs.AccountViewModels.SignInViewModel signInViewModel)
         {
-            return View();
+            if (!ModelState.IsValid)
+            {
+                return View(signInViewModel);
+            }
+
+            bool isEmail = false, isUserName = false;
+            if (await _userServices.EmailExistsAsync(signInViewModel.UserNameOrEmail))
+            {
+                isEmail = true;
+            }
+            if (await _userServices.UserNameExistsAsync(signInViewModel.UserNameOrEmail))
+            {
+                isUserName = true;
+            }
+
+            if (!isEmail && !isUserName)
+            {
+                ModelState.AddModelError("UserNameOrEmail", "No such UserNameOrEmail");
+                return View(signInViewModel);
+            }
+
+            var user = await _userServices.SignInUserAync(signInViewModel, isEmail, isUserName);
+            if (user == null)
+            {
+                ModelState.AddModelError("UserNameOrEmail", "No such UserNameOrEmail");
+                return View(signInViewModel);
+            }
+
+            if (!user.IsActive)
+            {
+                ModelState.AddModelError("UserNameOrEmail", "You need to activate your account. Check your emails");
+                return View(signInViewModel);
+            }
+
+            return Redirect("/");
         }
     }
 }
