@@ -23,12 +23,13 @@
 
             <div class="row justify-content-center">
                 <div class="col-lg-6">
-                    <form asp-controller="Account" asp-action="Signin" method="post" class="php-email-form shadow p-4 rounded bg-white">
+                    <form asp-controller="Account" asp-action="SignIn" method="post" class="shadow p-4 rounded bg-white">
                         <div class="row gy-3">
 
                             <div class="col-12">
                                 <label asp-for="UserNameOrEmail" class="form-label">User Name or Email</label>
                                 <input asp-for="UserNameOrEmail" type="text" class="form-control" required>
+                                <span asp-validation-for="UserNameOrEmail" class="text-danger"></span>
                             </div>
 
                             <div class="col-12">
@@ -61,7 +62,7 @@
     <!-- /Sign In Section -->
     <script>
         document.getElementById('togglePassword').addEventListener('click', function () {
-            const passwordInput = document.getElementById('password');
+            const passwordInput = document.getElementById('Password');
             const isPassword = passwordInput.type === 'password';
             passwordInput.type = isPassword ? 'text' : 'password';
             this.textContent = isPassword ? 'Hide Password' : 'Show Password';
