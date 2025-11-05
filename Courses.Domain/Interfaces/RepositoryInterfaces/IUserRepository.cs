@@ -16,6 +16,7 @@ namespace Courses.Domain.Interfaces.RepositoryInterfaces
         public Task<User> FindUserByUserNameAync(string userName);
         public Task<User> WhoseActivationCodeIsThisAsync(string activationCode);
         public Task<bool> ActivateUserAsync(User user);
+        public Task<bool> DeActivateUserAsync(User user);
         public Task<bool> ChangeActivationCodeAsync(User user, string newActivationCode);
 
     }

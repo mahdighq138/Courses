@@ -73,6 +73,18 @@ namespace Courses.Infrastructure.Repositories.UserRepo
             return false;
         }
 
+        public async Task<bool> DeActivateUserAsync(User user)
+        {
+            var foundUser = await _context.Users.FindAsync(user);
+            if (foundUser != null)
+            {
+                foundUser.IsActive = false;
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            return false;
+        }
+
 
     }
 }
