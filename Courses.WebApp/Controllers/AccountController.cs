@@ -70,7 +70,7 @@ namespace Courses.WebApp.Controllers
                 return View(signInViewModel);
             }
 
-            var user = await _userServices.SignInUserAync(signInViewModel, isEmail, isUserName);
+            var user = await _userServices.SignInUserAsync(signInViewModel, isEmail, isUserName);
             if (user == null)
             {
                 ModelState.AddModelError("UserNameOrEmail", "No such UserNameOrEmail");

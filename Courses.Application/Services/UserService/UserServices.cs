@@ -47,13 +47,13 @@ namespace Courses.Application.Services.UserService
             return _userRepository.UserNameExistsAsync(username);
         }
 
-        public async Task<User> SignInUserAync(SignInViewModel signInViewModel, bool isEmail = false, bool isUserName = false)
+        public async Task<User> SignInUserAsync(SignInViewModel signInViewModel, bool isEmail = false, bool isUserName = false)
         {
             User user;
             if (isEmail)
             {
                 string email = FixText.FixEmail(signInViewModel.UserNameOrEmail);
-                user = await _userRepository.FindUserByEmailAync(email);
+                user = await _userRepository.FindUserByEmailAsync(email);
             }
             else
             {
