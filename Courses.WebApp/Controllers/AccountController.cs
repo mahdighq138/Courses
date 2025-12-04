@@ -8,6 +8,9 @@ namespace Courses.WebApp.Controllers
     {
         private readonly IUserServices _userServices = userServices;
 
+        #region SignUp
+
+
         [HttpGet]
         public async Task<IActionResult> SignUp()
         {
@@ -49,8 +52,10 @@ namespace Courses.WebApp.Controllers
             await _userServices.RegisterUserAsync(signUpViewModel);
             return View("AccountCreatedSuccessfully", signUpViewModel);
         }
+        #endregion
 
 
+        #region SignIn
 
         [HttpGet]
         public async Task<IActionResult> SignIn()
@@ -108,7 +113,7 @@ namespace Courses.WebApp.Controllers
 
             return View();
         }
-
+        #endregion
 
     }
 }
