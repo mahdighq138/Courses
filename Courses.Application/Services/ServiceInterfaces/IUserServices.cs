@@ -11,8 +11,9 @@ namespace Courses.Application.Services.ServiceInterfaces
     public interface IUserServices
     {
         Task<int> RegisterUserAsync(SignUpViewModel signUpViewModel);
-        Task<User> SignInUserAync(SignInViewModel signInViewModel, bool isEmail, bool isUserName);
+        Task<User> SignInUserAsync(SignInViewModel signInViewModel, bool isEmail, bool isUserName);
         public Task<bool> EmailExistsAsync(string email);
         public Task<bool> UserNameExistsAsync(string username);
+        public Task<bool> ActivateAccountAsync(string activationCode);
     }
 }

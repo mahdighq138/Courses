@@ -1,0 +1,25 @@
+﻿<main class="main">
+    <div class="page-title" data-aos="fade">
+        <nav class="breadcrumbs">
+            <div class="container">
+                <ol>
+                    <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+                    <li class="current">Account Activation</li>
+                </ol>
+            </div>
+        </nav>
+    </div>
+
+    <div class="container">
+        @{
+            if (ViewData["isActive"] == null)
+            {
+                <p>No such Activation Code</p>
+            }
+            else
+            {
+                <p>Your Account has been activated successfully</p>
+            }
+        }
+    </div>
+</main>

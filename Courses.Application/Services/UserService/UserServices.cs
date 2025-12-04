@@ -25,8 +25,6 @@ namespace Courses.Application.Services.UserService
         {
             signUpViewModel.Email = FixText.FixEmail(signUpViewModel.Email);
 
-
-
             var userEntity = _mapper.Map<User>(signUpViewModel);
             userEntity.RegistrationDate = DateTime.Now;
             userEntity.ActivationCode = CodeNameGenerator.GenerateUniqueCode();
@@ -67,5 +65,28 @@ namespace Courses.Application.Services.UserService
             return null;
 
         }
+
+        public async Task<bool> ActivateAccountAsync(string activationCode)
+        {
+            var user = await _userRepository.WhoseActivationCodeIsThisAsync(activationCode);
+            if (user == null)
+            {
+                return false;
+            }
+
+            if (await _userRepository.ActivateUserAsync(user))
+            {
+                string newActivationCode = CodeNameGenerator.GenerateUniqueCode();
+                if (await _userRepository.ChangeActivationCodeAsync(user, newActivationCode))
+                {
+                    await _userRepository.CommitChangesAsync();
+                    return true;
+                }
+            }
+            return false;
+
+        }
+
+
     }
 }

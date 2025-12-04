@@ -22,6 +22,18 @@ namespace Courses.WebApp.Controllers
                 return View(signUpViewModel);
             }
 
+            if (signUpViewModel.Email.Contains(signUpViewModel.UserName, StringComparison.InvariantCultureIgnoreCase))
+            {
+                ModelState.AddModelError("UserName", "UserName cannot be a substring of the Email");
+                return View(signUpViewModel);
+            }
+
+            if (signUpViewModel.UserName.Contains(signUpViewModel.Email, StringComparison.InvariantCultureIgnoreCase))
+            {
+                ModelState.AddModelError("Email", "Email cannot be a substring of the Username");
+                return View(signUpViewModel);
+            }
+
             if (await _userServices.EmailExistsAsync(signUpViewModel.Email))
             {
                 ModelState.AddModelError("Email", "Email already taken");
@@ -85,5 +97,18 @@ namespace Courses.WebApp.Controllers
 
             return Redirect("/");
         }
+
+        [HttpGet("ActivateUserAccount/{activationCode}")]
+        public async Task<IActionResult> ActivateUserAccount(string activationCode)
+        {
+            if (await _userServices.ActivateAccountAsync(activationCode))
+            {
+                ViewData["isActive"] = "Active";
+            }
+
+            return View();
+        }
+
+
     }
 }
