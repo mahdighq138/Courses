@@ -1,6 +1,11 @@
-﻿using Courses.Application.Services.ServiceInterfaces;
+﻿using Courses.Application.DTOs.AccountViewModels;
+using Courses.Application.Services.ServiceInterfaces;
 using Courses.Application.Services.UserService;
+using Courses.Domain.Entities.User;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace Courses.WebApp.Controllers
 {
@@ -64,7 +69,7 @@ namespace Courses.WebApp.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> SignIn(Application.DTOs.AccountViewModels.SignInViewModel signInViewModel)
+        public async Task<IActionResult> SignIn(SignInViewModel signInViewModel)
         {
             if (!ModelState.IsValid)
             {
@@ -100,6 +105,8 @@ namespace Courses.WebApp.Controllers
                 return View(signInViewModel);
             }
 
+            await AuthenticateUser(user, signInViewModel.RememberMe);
+
             return Redirect("/");
         }
 
@@ -112,6 +119,26 @@ namespace Courses.WebApp.Controllers
             }
 
             return View();
+        }
+        #endregion
+
+        #region Authenticate
+        private async Task AuthenticateUser(User user, bool rememberMe)
+        {
+            var claims = new List<Claim>()
+            {
+                new Claim(ClaimTypes.NameIdentifier, user.UserId.ToString()),
+                new Claim(ClaimTypes.Name, user.UserName),
+                new Claim(ClaimTypes.Email, user.Email)
+            };
+            var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+            var principal = new ClaimsPrincipal(identity);
+            var properties = new AuthenticationProperties()
+            {
+                IsPersistent = rememberMe
+            };
+
+            await HttpContext.SignInAsync(principal, properties);
         }
         #endregion
 

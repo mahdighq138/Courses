@@ -8,11 +8,31 @@ using Courses.Application.Services.ServiceInterfaces;
 using Courses.Application.Services.UserService;
 using Courses.Domain.Interfaces.RepositoryInterfaces;
 using Courses.Infrastructure.Repositories.UserRepo;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+#region AddAuthentication
+builder.Services.AddAuthentication(
+    options =>
+    {
+        options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+        options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+        options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+        options.DefaultForbidScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+        options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+        options.DefaultSignOutScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    }).AddCookie(options=>
+    {
+        options.LoginPath = "/Account/SignIn";
+        options.LogoutPath = "/Account/SignOut";
+        options.AccessDeniedPath = "/Home/AccessDenied";
+        options.ExpireTimeSpan = TimeSpan.FromDays(30);
+    });
+#endregion
 
 #region Add UserRepository
 builder.Services.AddScoped<IUserRepository, UserRepository>();
