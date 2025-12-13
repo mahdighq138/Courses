@@ -4,6 +4,7 @@ using Courses.Application.Services.UserService;
 using Courses.Domain.Entities.User;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
@@ -58,7 +59,6 @@ namespace Courses.WebApp.Controllers
             return View("AccountCreatedSuccessfully", signUpViewModel);
         }
         #endregion
-
 
         #region SignIn
 
@@ -142,5 +142,12 @@ namespace Courses.WebApp.Controllers
         }
         #endregion
 
+        #region SignOut
+        public async Task<IActionResult> SignOut()
+        {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return Redirect("/");
+        }
+        #endregion
     }
 }

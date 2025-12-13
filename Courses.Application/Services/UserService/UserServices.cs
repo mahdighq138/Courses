@@ -39,7 +39,6 @@ namespace Courses.Application.Services.UserService
             return _userRepository.EmailExistsAsync(email);
         }
 
-
         public Task<bool> UserNameExistsAsync(string username)
         {
             return _userRepository.UserNameExistsAsync(username);

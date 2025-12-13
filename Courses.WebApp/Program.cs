@@ -1,14 +1,15 @@
-using Courses.Application.Mappers.UserMapper;
-using Courses.Infrastructure.Context;
-using Microsoft.EntityFrameworkCore;
 using AutoMapper;
-using Courses.Domain.Interfaces.SecurityInterfaces;
+using Courses.Application.Mappers.UserMapper;
 using Courses.Application.Services.Security.PasswordHash;
 using Courses.Application.Services.ServiceInterfaces;
 using Courses.Application.Services.UserService;
 using Courses.Domain.Interfaces.RepositoryInterfaces;
+using Courses.Domain.Interfaces.SecurityInterfaces;
+using Courses.Infrastructure.Context;
 using Courses.Infrastructure.Repositories.UserRepo;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -59,6 +60,7 @@ builder.Services.AddAutoMapper(cfg =>
 #region Add PasswordHasher
 builder.Services.AddTransient<IPasswordHasher, IdentityPasswordHasher>();
 #endregion
+
 
 var app = builder.Build();
 
