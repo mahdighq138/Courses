@@ -1,11 +1,15 @@
 ﻿using AutoMapper;
-using Courses.Application.DTOs.AccountViewModels;
+using Courses.Application.DTOs.UserDTOs;
+using Courses.Application.Interfaces.RepositoryInterfaces;
+using Courses.Application.Interfaces.SecurityInterfaces;
+
+
+
+//using Courses.Application.DTOs.AccountViewModels;
 using Courses.Application.Services.ServiceInterfaces;
 using Courses.Domain.Convertors;
 using Courses.Domain.Entities.User;
 using Courses.Domain.Generator;
-using Courses.Domain.Interfaces.RepositoryInterfaces;
-using Courses.Domain.Interfaces.SecurityInterfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,11 +25,11 @@ namespace Courses.Application.Services.UserService
         private readonly IUserRepository _userRepository = userRepository;
 
 
-        public async Task<int> RegisterUserAsync(SignUpViewModel signUpViewModel)
+        public async Task<int> RegisterUserAsync(UserRegisterRequestDto registerRequest)
         {
-            signUpViewModel.Email = FixText.FixEmail(signUpViewModel.Email);
+            registerRequest.Email = FixText.FixEmail(registerRequest.Email);
 
-            var userEntity = _mapper.Map<User>(signUpViewModel);
+            var userEntity = _mapper.Map<User>(registerRequest);
             userEntity.RegistrationDate = DateTime.Now;
             userEntity.ActivationCode = CodeNameGenerator.GenerateUniqueCode();
             userEntity.IsActive = false;
@@ -44,22 +48,24 @@ namespace Courses.Application.Services.UserService
             return _userRepository.UserNameExistsAsync(username);
         }
 
-        public async Task<User> SignInUserAsync(SignInViewModel signInViewModel, bool isEmail = false, bool isUserName = false)
+        public async Task<UserSignInResponseDto> SignInUserAsync(UserSignInRequestDto signInRequest, bool isEmail = false, bool isUserName = false)
         {
             User user;
             if (isEmail)
             {
-                string email = FixText.FixEmail(signInViewModel.UserNameOrEmail);
+                string email = FixText.FixEmail(signInRequest.UserNameOrEmail);
                 user = await _userRepository.FindUserByEmailAsync(email);
             }
             else
             {
-                user = await _userRepository.FindUserByUserNameAync(signInViewModel.UserNameOrEmail);
+                user = await _userRepository.FindUserByUserNameAync(signInRequest.UserNameOrEmail);
             }
-            bool correctPass = _hasher.VerifyPassword(user.Password, signInViewModel.Password);
+            bool correctPass = _hasher.VerifyPassword(user.Password, signInRequest.Password);
             if (correctPass)
             {
-                return user;
+                // map to response
+                var signInResponse = _mapper.Map<UserSignInResponseDto>(user);
+                return signInResponse;
             }
             return null;
 

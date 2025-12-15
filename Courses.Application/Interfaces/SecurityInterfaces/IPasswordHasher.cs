@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Courses.Domain.Interfaces.SecurityInterfaces
+namespace Courses.Application.Interfaces.SecurityInterfaces
 {
     public interface IPasswordHasher
     {

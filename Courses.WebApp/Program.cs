@@ -1,11 +1,11 @@
 using AutoMapper;
+using Courses.Application.Interfaces.RepositoryInterfaces;
+using Courses.Application.Interfaces.SecurityInterfaces;
 using Courses.Application.Mappers.UserMapper;
 using Courses.Application.Services.Email;
 using Courses.Application.Services.Security.PasswordHash;
 using Courses.Application.Services.ServiceInterfaces;
 using Courses.Application.Services.UserService;
-using Courses.Domain.Interfaces.RepositoryInterfaces;
-using Courses.Domain.Interfaces.SecurityInterfaces;
 using Courses.Infrastructure.Context;
 using Courses.Infrastructure.Repositories.UserRepo;
 using Microsoft.AspNetCore.Authentication.Cookies;

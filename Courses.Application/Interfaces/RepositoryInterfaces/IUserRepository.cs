@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Courses.Domain.Interfaces.RepositoryInterfaces
+namespace Courses.Application.Interfaces.RepositoryInterfaces
 {
     public interface IUserRepository
     {

@@ -1,5 +1,5 @@
 ﻿using Courses.Domain.Entities.User;
-using Courses.Domain.Interfaces.RepositoryInterfaces;
+using Courses.Application.Interfaces.RepositoryInterfaces;
 using Courses.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 using System;

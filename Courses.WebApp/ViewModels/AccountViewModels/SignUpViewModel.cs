@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Courses.Application.DTOs.AccountViewModels
+namespace Courses.WebApp.ViewModels.AccountViewModels
 {
     public class SignUpViewModel
     {
@@ -29,7 +29,6 @@ namespace Courses.Application.DTOs.AccountViewModels
         public required string Password { get; set; }
         [Compare("Password", ErrorMessage = "Passwords do not match.")]
         public required string ConfirmPassword { get; set; }
-
 
         public bool AgreeToTerms { get; set; }
     }

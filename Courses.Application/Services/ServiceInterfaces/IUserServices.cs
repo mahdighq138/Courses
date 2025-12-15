@@ -1,4 +1,4 @@
-﻿using Courses.Application.DTOs.AccountViewModels;
+﻿using Courses.Application.DTOs.UserDTOs;
 using Courses.Domain.Entities.User;
 using System;
 using System.Collections.Generic;
@@ -10,8 +10,8 @@ namespace Courses.Application.Services.ServiceInterfaces
 {
     public interface IUserServices
     {
-        Task<int> RegisterUserAsync(SignUpViewModel signUpViewModel);
-        Task<User> SignInUserAsync(SignInViewModel signInViewModel, bool isEmail, bool isUserName);
+        Task<int> RegisterUserAsync(UserRegisterRequestDto registerRequest);
+        Task<UserSignInResponseDto> SignInUserAsync(UserSignInRequestDto signInRequest, bool isEmail, bool isUserName);
         public Task<bool> EmailExistsAsync(string email);
         public Task<bool> UserNameExistsAsync(string username);
         public Task<bool> ActivateAccountAsync(string activationCode);

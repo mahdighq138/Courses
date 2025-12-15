@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Courses.Application.DTOs.AccountViewModels
+namespace Courses.WebApp.ViewModels.AccountViewModels
 {
     public class SignInViewModel
     {

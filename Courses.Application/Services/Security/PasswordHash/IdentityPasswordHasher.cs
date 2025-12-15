@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Courses.Application.Interfaces.SecurityInterfaces;
 using Courses.Domain.Entities.User;
-using Courses.Domain.Interfaces.SecurityInterfaces;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.Identity;
 
 namespace Courses.Application.Services.Security.PasswordHash
 {

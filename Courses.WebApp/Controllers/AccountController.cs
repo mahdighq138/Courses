@@ -1,7 +1,8 @@
-﻿using Courses.Application.DTOs.AccountViewModels;
+﻿using AutoMapper;
+using Courses.Application.DTOs.UserDTOs;
 using Courses.Application.Services.ServiceInterfaces;
 using Courses.Application.Services.UserService;
-using Courses.Domain.Entities.User;
+using Courses.WebApp.ViewModels.AccountViewModels;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
@@ -10,9 +11,10 @@ using System.Security.Claims;
 
 namespace Courses.WebApp.Controllers
 {
-    public class AccountController(IUserServices userServices) : Controller
+    public class AccountController(IUserServices userServices, IMapper mapper) : Controller
     {
         private readonly IUserServices _userServices = userServices;
+        private readonly IMapper _mapper = mapper;
 
         #region SignUp
 
@@ -24,7 +26,7 @@ namespace Courses.WebApp.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> SignUp(Application.DTOs.AccountViewModels.SignUpViewModel signUpViewModel)
+        public async Task<IActionResult> SignUp(SignUpViewModel signUpViewModel)
         {
             if (!ModelState.IsValid)
             {
@@ -55,7 +57,9 @@ namespace Courses.WebApp.Controllers
                 return View(signUpViewModel);
             }
 
-            await _userServices.RegisterUserAsync(signUpViewModel);
+            var userRegisterDto = _mapper.Map<UserRegisterRequestDto>(signUpViewModel);
+            await _userServices.RegisterUserAsync(userRegisterDto);
+
             return View("AccountCreatedSuccessfully", signUpViewModel);
         }
         #endregion
@@ -92,7 +96,8 @@ namespace Courses.WebApp.Controllers
                 return View(signInViewModel);
             }
 
-            var user = await _userServices.SignInUserAsync(signInViewModel, isEmail, isUserName);
+            var userSignInRequest = _mapper.Map<UserSignInRequestDto>(signInViewModel);
+            var user = await _userServices.SignInUserAsync(userSignInRequest, isEmail, isUserName);
             if (user == null)
             {
                 ModelState.AddModelError("UserNameOrEmail", "No such UserNameOrEmail");
@@ -123,7 +128,7 @@ namespace Courses.WebApp.Controllers
         #endregion
 
         #region Authenticate
-        private async Task AuthenticateUser(User user, bool rememberMe)
+        private async Task AuthenticateUser(UserSignInResponseDto user, bool rememberMe)
         {
             var claims = new List<Claim>()
             {
