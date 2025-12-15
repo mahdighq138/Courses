@@ -8,7 +8,6 @@ namespace Courses.Application.Services.ServiceInterfaces
 {
     public interface IEmailService
     {
-        Task SendEmailAsync(string to, string subject, 
-            string body, CancellationToken cancellationToken);
+        Task SendEmailAsync(string to, string subject, string body, string toName, bool isHtml = false);
     }
 }
