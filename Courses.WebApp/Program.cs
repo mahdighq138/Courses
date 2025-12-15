@@ -1,5 +1,6 @@
 using AutoMapper;
 using Courses.Application.Mappers.UserMapper;
+using Courses.Application.Services.Email;
 using Courses.Application.Services.Security.PasswordHash;
 using Courses.Application.Services.ServiceInterfaces;
 using Courses.Application.Services.UserService;
@@ -61,6 +62,10 @@ builder.Services.AddAutoMapper(cfg =>
 builder.Services.AddTransient<IPasswordHasher, IdentityPasswordHasher>();
 #endregion
 
+#region Add EmailSettings
+builder.Services.Configure<EmailSettings>(
+    builder.Configuration.GetSection("EmailSettings"));
+#endregion
 
 var app = builder.Build();
 
